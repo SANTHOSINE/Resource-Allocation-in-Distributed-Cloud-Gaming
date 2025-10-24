@@ -1,0 +1,29 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv("steam-200k.csv")
+data.head()
+data.columns = ['user_id', 'game', 'action', 'hours', '0']
+data = data[data['action'] == 'play']  # only play actions
+data = data.drop(columns=['0'])
+data['hours'] = data['hours'].astype(float)
+data.head()
+game_hours = data.groupby('game')['hours'].mean().sort_values(ascending=False).head(20)
+print(game_hours)
+def allocate_resources(hours):
+    if hours > 100:
+        return "High Resource"
+    elif hours > 50:
+        return "Medium Resource"
+    else:
+        return "Low Resource"
+
+alloc_df = pd.DataFrame({'Game': game_hours.index, 'Avg_Hours': game_hours.values})
+alloc_df['Resource_Level'] = alloc_df['Avg_Hours'].apply(allocate_resources)
+alloc_df
+plt.figure(figsize=(10,6))
+plt.barh(alloc_df['Game'], alloc_df['Avg_Hours'], color='skyblue')
+plt.xlabel("Average Hours Played")
+plt.ylabel("Game")
+plt.title("Top Games & Resource Allocation in Cloud Gaming")
+plt.gca().invert_yaxis()
+plt.show()
