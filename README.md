@@ -1,8 +1,5 @@
-#Resource Allocation in Distributed Cloud Gaming
-
-Topic: Resource Allocation in Distributed Cloud Gaming
-SDG Goal: SDG 9 – Industry, Innovation, and Infrastructure
-Dataset: Steam Video Games
+Resource Allocation in Distributed Cloud Gaming
+SDG 9 – Industry, Innovation, and Infrastructure
 
 Project Overview
 
